@@ -13,6 +13,8 @@ typedef enum utoa_t
 uint32_t putstr(const char* s);
 uint32_t my_printf(const char* format, ...);
 uint32_t vsprintf(char* buf, const char* format, va_list arg);
+
+/*unsigned to string*/
 uint32_t utoa(char* buf, uint32_t val, utoa_t base);
 
 #endif /* LIB_STDIO_H_ */

@@ -37,7 +37,7 @@ moonix_bin = build/moonix.bin
 
 .PHONY: all clean run debug gdb
 
-all: $(moonix)
+compile: $(moonix)
 
 clean:
 	@rm -fr build

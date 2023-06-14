@@ -6,7 +6,6 @@
 #include "stdio.h"
 
 static void Hw_init(void);
-static void Printf_test(void);
 
 void main(void)
 {

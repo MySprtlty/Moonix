@@ -224,6 +224,6 @@ typedef struct PL011_t
 } PL011_t;
 
 #define UART_BASE_ADDRESS0       0x10009000
-#define UART_INTERRUPT0          44
+#define UART_INTERRUPT0          44 /*UART IRQ ID is 44.*/
 
 #endif /* HAL_RVPB_UART_H_ */

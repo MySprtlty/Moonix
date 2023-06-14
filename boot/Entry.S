@@ -20,17 +20,20 @@
         LDR PC, fiq_handler_addr /*jump to reset fiq handler*/
 
         /*variable declaration*/
-        reset_handler_addr:     .word reset_handler
-        undef_handler_addr:     .word todo_handler
-        svc_handler_addr:       .word todo_handler
-        pftch_abt_handler_addr: .word todo_handler
-        data_abt_handler_addr:  .word todo_handler
+        reset_handler_addr:     .word Reset_handler
+        undef_handler_addr:     .word Todo_handler
+        svc_handler_addr:       .word Todo_handler
+        pftch_abt_handler_addr: .word Todo_handler
+        data_abt_handler_addr:  .word Todo_handler
         irq_handler_addr:       .word Irq_Handler
         fiq_handler_addr:       .word Fiq_Handler
     vector_end:
 
-    /*reset interrupt handler*/
-    reset_handler:
+    /*
+        reset interrupt handler
+        (init each mode's stack)
+    */
+    Reset_handler:
         MRS r0, cpsr /*Move System Register(CPSR) to Register*/
         BIC r1, r0, #0x1F /*Bit clear*/
         ORR r1, r1, #ARM_MODE_BIT_SVC /*change mode to SVC*/
@@ -69,6 +72,6 @@
 
         BL  main
 
-    todo_handler:
+    Todo_handler:
         B .
 .end

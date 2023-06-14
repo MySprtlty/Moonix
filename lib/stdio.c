@@ -27,6 +27,7 @@ uint32_t my_printf(const char* format, ...)
     return putstr(printf_buf);
 }
 
+/*processing format specifier*/
 uint32_t vsprintf(char* buf, const char* format, va_list arg)
 {
     uint32_t c = 0;
@@ -66,6 +67,7 @@ uint32_t vsprintf(char* buf, const char* format, va_list arg)
                 hex = (uint32_t)va_arg(arg, uint32_t);
                 c += utoa(&buf[c], hex, utoa_hex);
                 break;
+            /*case 'd':*/
             }
         }
         else
@@ -88,7 +90,7 @@ uint32_t utoa(char* buf, uint32_t val, utoa_t base)
 {
     uint32_t c = 0;
     int32_t  idx = 0;
-    char     tmp[11];   // It is big enough for store 32 bit int
+    char     tmp[11]; /*2^32 = 10 bit*/
 
     do {
         uint32_t t = val % (uint32_t)base;
@@ -101,7 +103,7 @@ uint32_t utoa(char* buf, uint32_t val, utoa_t base)
         idx++;
     } while(val);
 
-    // reverse
+    /* reverse */
     idx--;
     while (idx >= 0)
     {

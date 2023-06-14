@@ -2,6 +2,7 @@
 #include "stdint.h"
 #include "HalInterrupt.h"
 
+/*gcc extenstion*/
  __attribute__ ((interrupt ("IRQ"))) void Irq_Handler(void)
 {
     Hal_interrupt_run_handler();
