@@ -8,7 +8,7 @@
 #define MAX_TASK_NUM (TASK_STACK_SIZE / USR_TASK_STACK_SIZE) /*128*/
 #define PADDING 4
 
-typedef struct taskContext_t
+typedef struct task_context_t
 {
 	uint32_t spsr, r[13], pc;
 } task_context_t;
@@ -20,9 +20,9 @@ typedef struct tcb_t
 	uint8_t nice; /*priority*/
 } tcb_t;
 
-typedef void (*taskFunc_t)(void);
+typedef void (*task_func_t)(void);
 
 void task_init(void);
-uint32_t task_create(taskFunc_t taskFunc);
+uint32_t task_create(task_func_t);
 
 #endif /*TASK_H*/

@@ -7,7 +7,7 @@ static tcb_t task_list[MAX_TASK_NUM]; /*128*/
 static uint32_t task_list_top_index; 
 static tcb_t *sched_round_robin(void);
 
-
+/*init task_list (array of tcb)*/
 void task_init(void)
 {
     uint32_t i = 0;
@@ -29,11 +29,18 @@ void task_init(void)
 }
 
 #if 0
-uint32_t task_create(taskFunc_t taskFunc)
+uint32_t task_create(task_func_t task_func)
 {
 
 }
-#endif
+
 /*round robin sched*/
- 
+static tcb_t *sched_round_robin(void)
+{
+
+}
+
 /*priority-based sched*/
+#endif
+ 
+
