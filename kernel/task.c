@@ -3,9 +3,14 @@
 #include "ARMv7AR.h"
 #include "task.h"
 
+/*task info*/
 static tcb_t task_list[MAX_TASK_NUM]; /*128*/
 static uint32_t task_list_top_index; 
-static tcb_t *sched_round_robin(void);
+static uint32_t running_tcb_index; /*running task*/
+
+/*scheduler*/
+extern tcb_t *sched_round_robin(uint32_t* const, const uint32_t*, tcb_t*); /*temporary scheduler*/
+extern tcb_t *sched_priority_based(uint32_t* const, const uint32_t*, tcb_t*);
 
 /*init task_list (array of tcb)*/
 void task_init(void)
@@ -33,14 +38,6 @@ uint32_t task_create(task_func_t task_func)
 {
 
 }
-
-/*round robin sched*/
-static tcb_t *sched_round_robin(void)
-{
-
-}
-
-/*priority-based sched*/
 #endif
  
 
