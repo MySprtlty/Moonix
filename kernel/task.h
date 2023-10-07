@@ -19,7 +19,7 @@ typedef struct tcb_t
 	uint8_t nice; /*priority*/
 } tcb_t;
 
-typedef void (*task_func_t)(void);
+typedef void (*task_func_t)(void); /*task's execution code*/
 
 void task_init(void);
 uint32_t task_create(task_func_t);

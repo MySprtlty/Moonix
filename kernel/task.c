@@ -33,11 +33,26 @@ void task_init(void)
     return;
 }
 
-#if 0
+/*create task*/
+/*
+    Task ID == task_list's index
+*/
 uint32_t task_create(task_func_t task_func)
 {
+    tcb_t *new_tcb = &task_list[task_list_top_index];
+    task_context_t *new_context = (void *)0;
 
+    if (task_list_top_index + 1 > MAX_TASK_NUM)
+    {
+        return FULL_TASK_NUM;
+    }
+    task_list_top_index++;
+    new_context = (task_context_t *)new_tcb->sp;
+
+    new_context->pc = (uint32_t)task_func; /*pointer to function(void) returning void -> uint32_t*/
+
+    return task_list_top_index;
 }
-#endif
+
  
 
