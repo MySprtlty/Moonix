@@ -61,14 +61,15 @@ uint32_t task_create(task_func_t task_func)
     running_tcb = &task_list[running_tcb_index];
     next_tcb = sched_round_robin(&running_tcb_index, &task_list_top_index, task_list);
 
-    context_switch();
+    dispatcher();
  }
 
 /*
 __attribute__ ((naked)) creates raw assembly
 */
-__attribute__ ((naked)) void context_switch(void)
+__attribute__ ((naked)) void dispatcher(void)
 {
+    /*context switch*/
     __asm__ ("B save_context");
     __asm__ ("B restore_context");
 }
@@ -78,7 +79,7 @@ static __attribute__ ((naked)) void save_context(void)
 {
     /*
     save link register (not program counter)
-    lr stored context_switch's return address
+    lr stored dispatcher's return address
     */
     __asm__ ("PUSH {lr}");
 

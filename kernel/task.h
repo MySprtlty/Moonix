@@ -23,7 +23,7 @@ typedef void (*task_func_t)(void); /*task's execution code*/
 
 void task_init(void);
 uint32_t task_create(task_func_t);
-static __attribute__ ((naked)) void context_switch(void);
+static __attribute__ ((naked)) void dispatcher(void);
 static __attribute__ ((naked)) void save_context(void);
 static __attribute__ ((naked)) void restore_context(void);
 
