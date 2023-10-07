@@ -7,6 +7,8 @@
 static tcb_t task_list[MAX_TASK_NUM]; /*128*/
 static uint32_t task_list_top_index; 
 static uint32_t running_tcb_index; /*running task*/
+static tcb_t *running_tcb;
+static tcb_t *next_tcb;
 
 /*scheduler*/
 extern tcb_t *sched_round_robin(uint32_t* const, const uint32_t*, tcb_t*); /*temporary scheduler*/
@@ -54,5 +56,20 @@ uint32_t task_create(task_func_t task_func)
     return task_list_top_index;
 }
 
- 
+ void task_scheduler(void)
+ {
+    running_tcb = &task_list[running_tcb_index];
+    next_tcb = sched_round_robin(&running_tcb_index, &task_list_top_index, task_list);
+
+    context_switch();
+ }
+
+/*
+__attribute__ ((naked)) creates raw assembly
+*/
+__attribute__ ((naked)) context_switch(void)
+{
+    __asm__ ("B save_context");
+    __asm__ ("B restore_context");
+}
 

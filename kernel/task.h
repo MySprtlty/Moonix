@@ -23,5 +23,6 @@ typedef void (*task_func_t)(void); /*task's execution code*/
 
 void task_init(void);
 uint32_t task_create(task_func_t);
+__attribute__ ((naked)) context_switch(void);
 
 #endif /*TASK_H*/
