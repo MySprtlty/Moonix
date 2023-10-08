@@ -13,12 +13,15 @@ static tcb_t *next_tcb;
 /*scheduler*/
 extern tcb_t *sched_round_robin(uint32_t* const, const uint32_t*, tcb_t*); /*temporary scheduler*/
 extern tcb_t *sched_priority_based(uint32_t* const, const uint32_t*, tcb_t*);
+static tcb_t* Scheduler_round_robin_algorithm(void);
 
 /*init task_list (array of tcb)*/
 void task_init(void)
 {
     uint32_t i = 0;
     task_list_top_index = 0;
+    running_tcb_index = 0;
+
     task_context_t *ptc = (void *)0;
 
     for(i = 0; i < MAX_TASK_NUM; i++)
@@ -33,6 +36,12 @@ void task_init(void)
     }
 
     return;
+}
+
+void task_start(void)
+{
+    next_tcb = &task_list[FIRST_TASK_INDEX];
+    restore_context();
 }
 
 /*create task*/
@@ -59,8 +68,10 @@ uint32_t task_create(task_func_t task_func)
  void task_scheduler(void)
  {
     running_tcb = &task_list[running_tcb_index];
+#if 0
     next_tcb = sched_round_robin(&running_tcb_index, &task_list_top_index, task_list);
-
+#endif
+    next_tcb = Scheduler_round_robin_algorithm();
     dispatcher();
  }
 
@@ -75,7 +86,7 @@ __attribute__ ((naked)) void dispatcher(void)
 }
 
 /*save the context of running task*/
-static __attribute__ ((naked)) void save_context(void)
+__attribute__ ((naked)) void save_context(void)
 {
     /*
     save link register (not program counter)
@@ -84,10 +95,11 @@ static __attribute__ ((naked)) void save_context(void)
     __asm__ ("PUSH {lr}");
 
     /*save GPR*/
-    __asm__ ("push {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12}"); /*ARMv7 does not support the push {r0-r12} syntax.*/
+    __asm__ ("PUSH {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12}"); /*ARMv7 does not support the push {r0-r12} syntax.*/
 
     /*move cpsr -> r0*/
     __asm__ ("MRS r0, cpsr");
+    __asm__ ("PUSH {r0}");
 
     /*r0 = pointer to pointer to running_tcb*/
     __asm__ ("LDR r0, =running_tcb");
@@ -104,7 +116,7 @@ static __attribute__ ((naked)) void save_context(void)
 }
 
 /*restore the context of next task*/
-static __attribute__ ((naked)) void restore_context(void)
+__attribute__ ((naked)) void restore_context(void)
 {
     /*r0 = pointer to pointer to next_tcb*/
     __asm__ ("LDR r0, =next_tcb");
@@ -128,5 +140,13 @@ static __attribute__ ((naked)) void restore_context(void)
     /*
     program counter changes immediately
     */
-    __asm__ ("POP {pc}");
+    __asm__ ("POP  {pc}");
+}
+
+static tcb_t* Scheduler_round_robin_algorithm(void)
+{
+    running_tcb_index++;
+    running_tcb_index %= task_list_top_index;
+
+    return &task_list[running_tcb_index];
 }
