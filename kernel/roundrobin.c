@@ -7,11 +7,14 @@
 #include "ARMv7AR.h"
 #include "task.h"
 
-/*round robin sched*/
-tcb_t *sched_round_robin(uint32_t* const running, const uint32_t *top, tcb_t* list)
-{
-    (*running)++;
-    *running = *running % *top;
+extern tcb_t task_list[MAX_TASK_NUM]; /*128*/
+extern uint32_t task_list_top_index; 
+extern uint32_t running_tcb_index; /*running task*/
 
-    return &list[*running];
+tcb_t *sched_round_robin()
+{
+    running_tcb_index++;
+    running_tcb_index %= task_list_top_index;
+
+    return &task_list[running_tcb_index];
 }

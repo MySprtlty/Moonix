@@ -5,16 +5,16 @@
 #include "dispatch.h"
 
 /*task info*/
-static tcb_t task_list[MAX_TASK_NUM]; /*128*/
-static uint32_t task_list_top_index; 
-static uint32_t running_tcb_index; /*running task*/
-tcb_t *running_tcb;
-tcb_t *next_tcb;
+tcb_t task_list[MAX_TASK_NUM]; /*128*/
+uint32_t task_list_top_index; /*top of task_list*/
+uint32_t running_tcb_index; /*running task*/
+
+tcb_t *running_tcb; /*current running tcb*/
+tcb_t *next_tcb; /*next tcb scheduled*/
 
 /*scheduler*/
-extern tcb_t *sched_round_robin(uint32_t* const, const uint32_t*, tcb_t*); /*temporary scheduler*/
-extern tcb_t *sched_priority_based(uint32_t* const, const uint32_t*, tcb_t*);
-static tcb_t* Scheduler_round_robin_algorithm(void);
+extern tcb_t *sched_round_robin(void); /*temporary scheduler*/
+extern tcb_t *sched_priority_based(void); /*todo*/
 
 /*init task_list (array of tcb)*/
 void task_init(void)
@@ -31,6 +31,9 @@ void task_init(void)
         task_list[i].sp = (uint32_t)task_list[i].stack_base + USR_TASK_STACK_SIZE - PADDING;
 
         task_list[i].sp -= sizeof (task_context_t);
+        #if 0
+        task_list[i].nice = 0;
+        #endif
         ptc = (task_context_t *)task_list[i].sp;
         ptc->pc = 0;
         ptc->spsr = ARM_MODE_BIT_SYS;
@@ -69,17 +72,8 @@ uint32_t task_create(task_func_t task_func)
  void task_scheduler(void)
  {
     running_tcb = &task_list[running_tcb_index];
-#if 0
-    next_tcb = sched_round_robin(&running_tcb_index, &task_list_top_index, task_list);
-#endif
-    next_tcb = Scheduler_round_robin_algorithm();
+
+    next_tcb = sched_round_robin();
+
     dispatcher();
  }
-
-static tcb_t* Scheduler_round_robin_algorithm(void)
-{
-    running_tcb_index++;
-    running_tcb_index %= task_list_top_index;
-
-    return &task_list[running_tcb_index];
-}
