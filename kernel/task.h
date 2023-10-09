@@ -8,6 +8,9 @@
 #define MAX_TASK_NUM (TASK_STACK_SIZE / USR_TASK_STACK_SIZE) /*128*/
 #define FIRST_TASK_INDEX 0
 
+/*integer constant 0, 1, 2*/
+typedef enum nice_t {HIGH, MID, LOW} nice_t;
+
 typedef struct task_context_t
 {
 	uint32_t spsr, r[13], pc;

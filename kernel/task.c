@@ -31,9 +31,7 @@ void task_init(void)
         task_list[i].sp = (uint32_t)task_list[i].stack_base + USR_TASK_STACK_SIZE - PADDING;
 
         task_list[i].sp -= sizeof (task_context_t);
-        #if 0
-        task_list[i].nice = 0;
-        #endif
+        task_list[i].nice = MID;
         ptc = (task_context_t *)task_list[i].sp;
         ptc->pc = 0;
         ptc->spsr = ARM_MODE_BIT_SYS;
