@@ -24,9 +24,6 @@ typedef void (*task_func_t)(void); /*task's execution code*/
 
 void task_init(void);
 uint32_t task_create(task_func_t);
-void dispatcher(void);
-void save_context(void);
-void restore_context(void);
 void task_scheduler(void);
 void task_start(void);
 
