@@ -62,12 +62,12 @@ static void user_task0(void)
 {
     while(true)
     {
-        my_printf("task0] running.\n");
+        my_printf("task0] running\n");
         start_user_timer();
         /*factorial*/
 
         uint32_t i = 0;   
-        uint32_t num = 10;
+        uint32_t num = rand_range_int(4, 10);
         uint32_t result = 1;
 
         for (i = 1; i <= num; i++) 
@@ -77,9 +77,9 @@ static void user_task0(void)
         my_printf("task0] %u! == %u\n", num, result);
         /*fatrial end*/
 
-        sleep(1000);
+        sleep(rand_int(5000));
         my_printf("task0] cpu time: %ums\n",stop_user_timer());
-        my_printf("task0] yielding the CPU.\n");
+        my_printf("task0] yielding the CPU\n");
 
         yield_cpu();
     }
@@ -90,11 +90,11 @@ static void user_task1(void)
 {
     while(true)
     {
-        my_printf("task1] running.\n");
+        my_printf("task1] running\n");
         start_user_timer();
 
         /*find prime*/
-        uint32_t n = 100;
+        uint32_t n = rand_range_int(4, 100);
         uint32_t num = 0;
         uint32_t i = 0;
         my_printf("task1] prime numbers up to %u\n", n);
@@ -117,9 +117,9 @@ static void user_task1(void)
         my_printf("\n");
         /*find prime end*/
 
-        sleep(1000);
+        sleep(rand_int(5000));
         my_printf("task1] cpu time: %ums\n",stop_user_timer());
-        my_printf("task1] yielding the CPU.\n");
+        my_printf("task1] yielding the CPU\n");
         
         yield_cpu();
     }
@@ -129,11 +129,11 @@ static void user_task2(void)
 {
     while(true)
     {
-        my_printf("task2] running.\n");
+        my_printf("task2] running\n");
         start_user_timer();
         
         /*fibonacci*/
-        uint32_t n = 10, i = 0, t1 = 0, t2 = 1, nextTerm;
+        uint32_t n = rand_range_int(3, 10), i = 0, t1 = 0, t2 = 1, nextTerm;
 
         my_printf("task2] first %u terms of fibonacci sequence\n", n);
         my_printf("task2] ");
@@ -146,9 +146,9 @@ static void user_task2(void)
         my_printf("\n");
         /*fibonacci end*/
 
-        sleep(1000);
+        sleep(rand_int(5000));
         my_printf("task2] cpu time: %ums\n",stop_user_timer());
-        my_printf("task2] yielding the CPU.\n");
+        my_printf("task2] yielding the CPU\n");
 
         yield_cpu();
     }
