@@ -1,5 +1,6 @@
 #include "stdint.h"
 #include "stdbool.h"
+#include "stdlib.h"
 
 #include "HalUart.h"
 #include "HalInterrupt.h"
@@ -61,7 +62,25 @@ static void user_task0(void)
 {
     while(true)
     {
-        my_printf("user_task0 is running.\n");
+        my_printf("task0] running.\n");
+        start_user_timer();
+        /*factorial*/
+
+        uint32_t i = 0;   
+        uint32_t num = 10;
+        uint32_t result = 1;
+
+        for (i = 1; i <= num; i++) 
+        {
+            result *= i;
+        }
+        my_printf("task0] %u! == %u\n", num, result);
+        /*fatrial end*/
+
+        sleep(1000);
+        my_printf("task0] cpu time: %ums\n",stop_user_timer());
+        my_printf("task0] yielding the CPU.\n");
+
         yield_cpu();
     }
 
@@ -71,7 +90,37 @@ static void user_task1(void)
 {
     while(true)
     {
-        my_printf("user_task1 is running.\n");
+        my_printf("task1] running.\n");
+        start_user_timer();
+
+        /*find prime*/
+        uint32_t n = 100;
+        uint32_t num = 0;
+        uint32_t i = 0;
+        my_printf("task1] prime numbers up to %u\n", n);
+
+        my_printf("task1] ");
+        for (num = 2; num <= n; num++) {
+            bool isPrime = true;
+
+            for (i = 2; i * i <= num; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime) {
+                my_printf("%u ", num);
+            }
+        }
+        my_printf("\n");
+        /*find prime end*/
+
+        sleep(1000);
+        my_printf("task1] cpu time: %ums\n",stop_user_timer());
+        my_printf("task1] yielding the CPU.\n");
+        
         yield_cpu();
     }
 }
@@ -80,7 +129,27 @@ static void user_task2(void)
 {
     while(true)
     {
-        my_printf("user_task2 is running.\n");
+        my_printf("task2] running.\n");
+        start_user_timer();
+        
+        /*fibonacci*/
+        uint32_t n = 10, i = 0, t1 = 0, t2 = 1, nextTerm;
+
+        my_printf("task2] first %u terms of fibonacci sequence\n", n);
+        my_printf("task2] ");
+        for (i = 1; i <= n; ++i) {
+            my_printf("%u ", t1);
+            nextTerm = t1 + t2;
+            t1 = t2;
+            t2 = nextTerm;
+        }
+        my_printf("\n");
+        /*fibonacci end*/
+
+        sleep(1000);
+        my_printf("task2] cpu time: %ums\n",stop_user_timer());
+        my_printf("task2] yielding the CPU.\n");
+
         yield_cpu();
     }
 }
