@@ -19,11 +19,6 @@ void main(void)
 {
     Hw_init();
 
-    uint32_t i = 100;
-
-    my_printf("%s\n", "my_printf works well!");
-    putstr("Hello World!\n");
-
     kernel_init();
     while(true);
 }

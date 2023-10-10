@@ -1,6 +1,7 @@
 #include "stdint.h"
 #include "stdbool.h"
 #include "HalTimer.h"
+#include "stdio.h"
 
 static uint32_t start, stop;
 
@@ -53,4 +54,17 @@ uint32_t rand_range_int(const uint32_t lower, const uint32_t upper)
     uint32_t range = upper - lower;
 
     return lower + (seed % range + 1);
+}
+
+void print_moonix(const uint32_t t)
+{
+    my_printf("\n\n");
+    my_printf("  __  __                  _ __    __\n");
+    my_printf(" |  \\/  | ___  ___  _ __ (_)\\ \\  / /\n");
+    my_printf(" | |\\/| |/ _ \\/ _ \\| '_ \\| | \\ \\/ /\n");
+    my_printf(" | |  | | (_)  (_) | | | | | / /\\ \\\n");
+    my_printf(" |_|  |_|\\___/\\___/|_| |_|_|/_/  \\_\\\n");
+    my_printf("\n\n");
+    
+    sleep(t);
 }
