@@ -1,9 +1,13 @@
 # Moonix
 - RTOS
+- Non Preemptive Priority Scheduling
 
 ## 1. Architecture
 ### 1) Memory Structure
-![Moonix's Memory](https://github.com/MySprtlty/Moonix/assets/89295517/5bdeab5d-f483-442d-90d2-7e826d219b95)
+![Moonix's Memory  500KB](https://github.com/MySprtlty/Moonix/assets/89295517/4c6c6145-590a-40e4-82b7-26b6e6d4877f)
+
+### 2) TCB
+![Moonix's TCB](https://github.com/MySprtlty/Moonix/assets/89295517/58482a58-4e04-4e1c-862b-c22a7afc2dde)
 
 ---
 
