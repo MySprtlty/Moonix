@@ -4,5 +4,6 @@
 /*set or clear the bit*/
 #define SET_BIT(p,n) ((p) |=  (1 << (n)))
 #define CLR_BIT(p,n) ((p) &= ~(1 << (n)))
+#define TGL_BIT(p,n) ((p) ^= (1 << (n)))
 
 #endif /* INCLUDE_CTRLBIT_H_ */
