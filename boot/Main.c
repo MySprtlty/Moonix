@@ -76,7 +76,7 @@ static void user_task0(void)
         my_printf("task0] cpu time: %ums\n",stop_user_timer());
         my_printf("task0] yielding the CPU\n");
 
-        yield_cpu();
+        kernel_yield_cpu();
     }
 
 }
@@ -116,7 +116,7 @@ static void user_task1(void)
         my_printf("task1] cpu time: %ums\n",stop_user_timer());
         my_printf("task1] yielding the CPU\n");
         
-        yield_cpu();
+        kernel_yield_cpu();
     }
 }
 
@@ -145,6 +145,6 @@ static void user_task2(void)
         my_printf("task2] cpu time: %ums\n",stop_user_timer());
         my_printf("task2] yielding the CPU\n");
 
-        yield_cpu();
+        kernel_yield_cpu();
     }
 }
