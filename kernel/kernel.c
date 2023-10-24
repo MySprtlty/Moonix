@@ -88,18 +88,22 @@ bool kernel_send_msg(msgQ_task_t q_name, uint8_t* data, uint32_t count)
     {
         msgQ_count = rear - front;
     }
+    else /*invalid q_name*/
+    {
+        return false;
+    }
+
 	if (count > (MSGQ_SIZE - msgQ_count))
 	{
 		return false;
 	}
 
-    for (uint32_t i = 0 ; i < count ; i++)
+    for (uint32_t i = 0 ; i < count ; i++, data++)
     {
         if (!msgQ_enQ(q_name, *data))
         {
             return false;
         }
-        data++;
     }
 
     return true;
@@ -107,13 +111,12 @@ bool kernel_send_msg(msgQ_task_t q_name, uint8_t* data, uint32_t count)
 
 uint32_t kernel_recv_msg(msgQ_task_t q_name, uint8_t* data, uint32_t count)
 {
-    for (uint32_t i = 0 ; i < count ; i++)
+    for (uint32_t i = 0 ; i < count ; i++, data++)
     {
         if (!msgQ_deQ(q_name, data))
         {
             return i;
         }
-        data++;
     }
 
     return count;

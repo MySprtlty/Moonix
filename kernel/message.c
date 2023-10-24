@@ -7,16 +7,16 @@ static cirQ_t msgQ[MSGQ_TASK_NUM];
 
 bool msgQ_is_valid(const msgQ_task_t q_name)
 {
-    if(q_name < MSGQ_TASK_NUM)
+    if(q_name < MSGQ_TASK_NUM) /*valid*/
     {
         return true;
     }
-    return false;
+    return false; /*invalid*/
 }
 
 bool msgQ_get_rear(msgQ_task_t q_name, uint32_t * const rear)
 {
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
@@ -26,7 +26,7 @@ bool msgQ_get_rear(msgQ_task_t q_name, uint32_t * const rear)
 
 bool msgQ_get_front(msgQ_task_t q_name, uint32_t * const front)
 {
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
@@ -52,7 +52,7 @@ void msgQ_init(void)
 }
 bool msgQ_is_empty(const msgQ_task_t q_name)
 {   
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
@@ -65,7 +65,7 @@ bool msgQ_is_empty(const msgQ_task_t q_name)
 
 bool msgQ_is_full(msgQ_task_t q_name)
 {
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
@@ -79,7 +79,7 @@ bool msgQ_is_full(msgQ_task_t q_name)
 
 bool msgQ_enQ(msgQ_task_t q_name, uint8_t d)
 {
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
@@ -98,7 +98,7 @@ bool msgQ_enQ(msgQ_task_t q_name, uint8_t d)
 
 bool msgQ_deQ(msgQ_task_t q_name, uint8_t* d)
 {
-    if(msgQ_is_valid(q_name))
+    if(!msgQ_is_valid(q_name))
     {
         return false;
     }
