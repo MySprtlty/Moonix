@@ -39,9 +39,13 @@ typedef enum event_flag_t
     EVENT_FLAG_Reserved31 = 0x80000000
 }event_flag_t;
 
+typedef void (*defEH)(void); /*default event handler*/
 void event_flag_init(void);
 void event_flag_set(event_flag_t);
 void event_flag_clear(event_flag_t);
 bool event_flag_check(event_flag_t);
+uint32_t event_flag_to_index(event_flag_t);
+void register_defEH(event_flag_t, defEH);
+void remove_defEH(event_flag_t);
 
 #endif /*EVENT_H_*/

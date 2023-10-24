@@ -9,25 +9,32 @@
 
 #include "kernel.h"
 
-static void Hw_init(void);
+static void hw_init(void);
+static void event_init(void);
+static void kernel_init(void);
 static void user_task0(void);
 static void user_task1(void);
 static void user_task2(void);
-static void kernel_init(void);
+
 
 void main(void)
 {
-    Hw_init();
-
+    hw_init();
+    event_init();
     kernel_init();
     while(true);
 }
 
-static void Hw_init(void)
+static void hw_init(void)
 {
     Hal_interrupt_init();
     Hal_uart_init();
     Hal_timer_init();
+}
+
+static void event_init(void)
+{
+    event_flag_init();
 }
 
 static void kernel_init(void)
