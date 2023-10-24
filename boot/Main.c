@@ -21,6 +21,7 @@ void main(void)
 {
     hw_init();
     event_init();
+    message_init();
     kernel_init();
     while(true);
 }
@@ -35,6 +36,11 @@ static void hw_init(void)
 static void event_init(void)
 {
     event_flag_init();
+}
+
+static void message_init(void)
+{
+    msgQ_init();
 }
 
 static void kernel_init(void)

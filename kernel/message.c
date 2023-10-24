@@ -14,6 +14,26 @@ bool msgQ_is_valid(const msgQ_task_t q_name)
     return false;
 }
 
+bool msgQ_get_rear(msgQ_task_t q_name, uint32_t * const rear)
+{
+    if(msgQ_is_valid(q_name))
+    {
+        return false;
+    }
+    *rear = msgQ[q_name].rear;
+    return true;
+}
+
+bool msgQ_get_front(msgQ_task_t q_name, uint32_t * const front)
+{
+    if(msgQ_is_valid(q_name))
+    {
+        return false;
+    }
+    *front = msgQ[q_name].front;
+    return true;
+}
+
 void msgQ_init(void)
 {
     uint32_t size = 0 ;
@@ -57,7 +77,7 @@ bool msgQ_is_full(msgQ_task_t q_name)
 }
 
 
-bool msgQ_is_enQ(msgQ_task_t q_name, uint8_t d)
+bool msgQ_enQ(msgQ_task_t q_name, uint8_t d)
 {
     if(msgQ_is_valid(q_name))
     {
@@ -76,7 +96,7 @@ bool msgQ_is_enQ(msgQ_task_t q_name, uint8_t d)
     return true;
 }
 
-bool msgQ_is_deQ(msgQ_task_t q_name, uint8_t* d)
+bool msgQ_deQ(msgQ_task_t q_name, uint8_t* d)
 {
     if(msgQ_is_valid(q_name))
     {

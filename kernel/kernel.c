@@ -20,7 +20,9 @@ void kernel_start(void)
 }
 
 /*--------------------------------------------*/
-/*Semaphore API*/
+/*
+    Semaphore API
+*/
 void kernel_semaphore_lock(resource_t resource)
 {   
     while(!semaphore_signal(resource))
@@ -72,4 +74,47 @@ event_flag_t kernel_monitor_events(uint32_t events) /*set the event flag using t
     }
 
     return EVENT_FLAG_NULL;
+}
+
+/*--------------------------------------------*/
+/*
+    Message API
+*/
+bool kernel_send_msg(msgQ_task_t q_name, uint8_t* data, uint32_t count)
+{
+    uint32_t rear = 0 , front = 0, msgQ_count = 0;
+
+    if(msgQ_get_rear(q_name, &rear) && msgQ_get_front(q_name, &front))
+    {
+        msgQ_count = rear - front;
+    }
+	if (count > (MSGQ_SIZE - msgQ_count))
+	{
+		return false;
+	}
+
+    for (uint32_t i = 0 ; i < count ; i++)
+    {
+        if (!msgQ_enQ(q_name, *data))
+        {
+            return false;
+        }
+        data++;
+    }
+
+    return true;
+}
+
+uint32_t kernel_recv_msg(msgQ_task_t q_name, uint8_t* data, uint32_t count)
+{
+    for (uint32_t i = 0 ; i < count ; i++)
+    {
+        if (!msgQ_deQ(q_name, data))
+        {
+            return i;
+        }
+        data++;
+    }
+
+    return count;
 }

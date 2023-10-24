@@ -34,11 +34,16 @@ typedef struct cirQ_t
     uint8_t queue[MSGQ_SIZE];
 } cirQ_t;
 
-bool msgQ_is_valid(const msgQ_task_t);
-void msgQ_init(void);
-bool msgQ_is_empty(const msgQ_task_t);
-bool msgQ_is_full(const msgQ_task_t);
-bool msgQ_is_enQ(const msgQ_task_t, uint8_t);
-bool msgQ_is_deQ(const msgQ_task_t, uint8_t*);
+bool msgQ_is_valid(const msgQ_task_t); /*is the queue name valid*/
+
+bool msgQ_get_rear(msgQ_task_t, uint32_t * const); /*Get rear element of msgQ*/
+bool msgQ_get_front(msgQ_task_t, uint32_t * const); /*Get front element of msgQ*/
+
+void msgQ_init(void); /*init*/
+bool msgQ_is_empty(const msgQ_task_t); /*is empty*/
+bool msgQ_is_full(const msgQ_task_t); /*is full*/
+
+bool msgQ_enQ(const msgQ_task_t, uint8_t); /*enqueue*/
+bool msgQ_deQ(const msgQ_task_t, uint8_t*); /*dequeue*/
 
 #endif
