@@ -11,6 +11,7 @@
 
 static void hw_init(void);
 static void event_init(void);
+static void message_init(void);
 static void kernel_init(void);
 static void user_task0(void);
 static void user_task1(void);
