@@ -1,11 +1,11 @@
 ![Moonix](https://github.com/MySprtlty/Moonix/assets/89295517/12f41d4a-4b50-48a6-8ae0-a819ea486f28)
 # Moonix
-- RTOS for ARM Cortex-A8 processor board (RealView PB).
+- RTOS for ARM Cortex-A8 processor board (RealView PB)
 - Uses Non Preemptive Priority Scheduling
 - Manages various hardware
 - Interrupt/Exception handling
 - Supports IPC (Inter-Process Communication)
-- Synchronization mechanism (semaphore).
+- Synchronization mechanism (semaphore)
 
 ## 1. Development Environment
 |구분|내용|
@@ -91,6 +91,7 @@ moonix
 
 ---
 ## 3. DataSheet
+- [arm info center](https://developer.arm.com/documentation/dui0417/d/?lang=en)
 ### 1) Timer (SP804)
 - [Summary of registers](https://developer.arm.com/documentation/ddi0271/d/programmer-s-model/summary-of-registers)
 - [Interface reset](https://developer.arm.com/documentation/ddi0271/d/functional-overview/functional-description/interface-reset?lang=en)
