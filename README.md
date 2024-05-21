@@ -1,7 +1,7 @@
 ![Moonix](https://github.com/MySprtlty/Moonix/assets/89295517/12f41d4a-4b50-48a6-8ae0-a819ea486f28)
 # Moonix
 - RTOS for ARM Cortex-A8 processor board (RealView PB)
-- Uses Non Preemptive Priority Scheduling
+- Uses Non Preemptive Scheduling
 - Manages various hardware
 - Interrupt/Exception handling
 - Supports IPC (Inter-Process Communication)
