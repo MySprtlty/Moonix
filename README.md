@@ -2,17 +2,14 @@
 # Moonix
 - A Real-Time Operating System(RTOS) targeted for the ARM Cortex-A8 board.
 
-## 1. Links
-- Detailed Description: [Moonix](https://night-skink-d1c.notion.site/Moonix-121db89b5df24ce09b86fdcafa1b1611)
-
-## 2. Key Features
+## 1. Key Features
 - Non-Preemptive Scheduling
 - Configuration and management of Timer, UART, and Interrupt Controller.
 - Interrupt and Exception Handling
 - Inter-Process Communication (IPC)
 - Synchronization Mechanism
 
-## 3. Development Environment
+## 2. Development Environment
 | Category | Tool/Technology |
 |:---|:---|
 | Languages | C, ARMv7-A Assembly |
@@ -20,7 +17,7 @@
 | Build Tools | gcc-ARM-none-eabi |
 | Other Tools | git, make, shell scripts, gdb, qemu |
 
-## 4. Design
+## 3. Design
 - Selection of operational modes for ARM to optimize performance.
 - Utilized HAL to enhance code portability across different hardware platforms.
 - Designed the memory structure.
@@ -29,7 +26,7 @@
 - Developed mechanisms for task synchronization within the kernel.
 - Designed kernel API functions to facilitate interaction with the OS functionalities.
 
-## 5. Implementation
+## 4. Implementation
 - Conducted initial hardware setup upon power-up of the ARM core.
 - Differentiated and processed various types of interrupts using the Interrupt Controller.
 - Developed kernel API functions and essential libraries.
@@ -37,7 +34,7 @@
 - Developed IPC mechanisms using message queues and event flags.
 - Implemented semaphores as a synchronization tool to manage access to resources.
 
-## 6. Directory Structure
+## 5. Directory Structure
 ```text
 moonix
 ├── boot
@@ -90,25 +87,25 @@ moonix
 ├── moonix.ld // Linker script.
 └── README.md
 ```
-## 7. References
+## 6. References
 - [ARM info center](https://developer.arm.com/documentation/dui0417/d/?lang=en)
-### 7-1. Timer (SP804)
+### 6-1. Timer (SP804)
 - [Summary of registers](https://developer.arm.com/documentation/ddi0271/d/programmer-s-model/summary-of-registers)
 - [Interface reset](https://developer.arm.com/documentation/ddi0271/d/functional-overview/functional-description/interface-reset?lang=en)
 
-### 7-2. Philips ISP1761 controller
+### 6-2. Philips ISP1761 controller
 - [Data sheet](https://pdf1.alldatasheet.co.kr/datasheet-pdf/view/103865/PHILIPS/ISP1761.html)
 - [USB interface](https://developer.arm.com/documentation/dui0417/d/programmer-s-reference/usb-interface?lang=en)
 
-### 7-3. UART (PL011) 
+### 6-3. UART (PL011) 
 - [Summary of registers](https://developer.arm.com/documentation/ddi0183/g/programmers-model/summary-of-registers?lang=en)
 - [UARTDR](https://developer.arm.com/documentation/ddi0183/g/programmers-model/register-descriptions/data-register--uartdr?lang=en)
 - [UART base address](https://developer.arm.com/documentation/dui0417/d/programmer-s-reference/uart?lang=en)
 
-### 7-4. GIC
+### 6-4. GIC
 - [GIC registers](https://developer.arm.com/documentation/dui0417/d/programmer-s-reference/generic-interrupt-controller--gic/generic-interrupt-controller-registers?lang=en)
 - [GIC-interput signal](https://velog.io/write?id=936cb7da-2d0d-48c5-8fd1-477b70b46bbe)
 
-### 7-5. RealView PB
+### 6-5. RealView PB
 - [SYS_ID](https://developer.arm.com/documentation/dui0417/d/programmer-s-reference/status-and-system-control-registers/id-register--sys-id?lang=en)
 
